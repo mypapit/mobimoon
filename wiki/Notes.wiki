@@ -1,6 +1,4 @@
-#summary One-sentence summary of this page.
 #labels Featured
-
 = Introduction =
 
 MobiMoon is a JavaME mobile application that displays Moon phase and Hijri date.
@@ -11,11 +9,11 @@ MobiMoon is a JavaME mobile application that displays Moon phase and Hijri date.
 All MobiMoon release download follows this convention :
 _mobimoon-<release>.zip_
 
-MIDP 1.0 releases append _-light_ at the end of the file name :
+MIDP 1.0 releases are appended with  _-light_ at the end of the file name :
 _mobimoon-<release>-light.zip_
 
 Example :
   * mobimoon-1.0.zip
   * mobimoon-1.0-light.zip
 
-
+Source code for mobimoon is available from Google Code SVN server
