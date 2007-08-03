@@ -26,6 +26,17 @@ public class MoonItem extends ImageItem
 {
 	private String imgMoon[] = {"/b1.png","/b2.png","/b3.png","/b4.png",
 								"/b5.png","/b6.png","/b7.png","/b8.png"};
+	/*
+	private String strPhase[] = {"Bulan Baru",
+								"Mengambang Suku",
+								"Mengambang Separuh",
+								"Mengambang",
+								"Bulan Penuh",
+								"Menurun",
+								"Menurun Separuh",
+								"Menurun Suku"};
+	*/
+	
 	private String strPhase[] = {"New Moon",
 								"Waxing Cresent",
 								"First Quarter",
@@ -35,7 +46,7 @@ public class MoonItem extends ImageItem
 								"Third Quarter",
 								"Waning Cresent"};
 								
-								
+							
 
 
 	public MoonItem(String label, int layout, String altText) 
