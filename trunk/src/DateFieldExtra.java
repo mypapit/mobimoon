@@ -53,7 +53,7 @@ public class DateFieldExtra extends DateField
 		m = calendar.get(calendar.MONTH)+1;
 		y = calendar.get(calendar.YEAR);
 		
-		this.moonPhase(y,m,d);
+		this.moonPhase(y,m-1,d);
 		
 		
 		hc = new HijriConvert(d,m,y);

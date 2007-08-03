@@ -1,11 +1,11 @@
 MIDlet-1: MobiMoon, /b.png, MobiMoon
 MIDlet-Description: Display moon phase and Hijri date
 MIDlet-Icon: /b.png
-MIDlet-Info-URL: http://mobile.mypapit.net
-MIDlet-Jar-Size: 9880
-MIDlet-Jar-URL: MobiMoon.jar
+MIDlet-Info-URL: http://java.mobilepit.com/p/mobimoon/
+MIDlet-Jar-Size: 9996
+MIDlet-Jar-URL: http://java.mobilepit.com/d/mobimoon-1.1ms.jar
 MIDlet-Name: MobiMoon
 MIDlet-Vendor: mobile.mypapit.net
-MIDlet-Version: 1.0
+MIDlet-Version: 1.1
 MicroEdition-Configuration: CLDC-1.1
 MicroEdition-Profile: MIDP-2.0

@@ -60,8 +60,8 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 							"Z.Hijjah"
 							
 						};
-							
-	*/							
+		*/					
+								
 	private String month[] = {
 							"NIL",
 							"Muharram",
@@ -135,7 +135,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 			destroyApp(true);
 		} else if (c== cmdAbout) {
 		
-			aboutForm = new AboutForm("About","MobiMoon 1.0","/b5.png");
+			aboutForm = new AboutForm("About","MobiMoon 1.1","/b5.png");
 			aboutForm.addCommand(cmdBack);
 			aboutForm.setHyperlink("http://java.mobilepit.com", (MIDlet) this);
 			aboutForm.setCopyright("Mohammad Hafiz","2007");
