@@ -1,0 +1,11 @@
+14 Aug 2007 Mobimoon 2.0
+----------------------
+- added 'Important Islamic Date' functionality
+
+5 Aug 2007 Mobimoon 1.1
+---------------------
+- fixes minor bugs in calculation algorithm
+
+27 July 2007 Mobimoon 1.0
+--------------------
+- first release
