@@ -1,0 +1,5 @@
+TODO
+- better documentation
+- MIDP 1.0 version
+- improved website presentation
+- test on more popular phones
