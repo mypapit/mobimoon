@@ -12,7 +12,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * MobiMoon 1.0 <info@mypapit.net>
+ * MobiMoon 2.0 <info@mypapit.net>
  * Copyright 2007 Mohammad Hafiz bin Ismail. All rights reserved.
  * 
  * DateFieldExtra.java 
@@ -53,6 +53,12 @@ public class DateFieldExtra extends DateField
 		m = calendar.get(calendar.MONTH)+1;
 		y = calendar.get(calendar.YEAR);
 		
+		//eliminate unforseenable bugs in certain phones 
+		if (y<1600) { 
+			y = 1600; 
+			calendar.set(calendar.YEAR,y);
+			this.setDate(calendar.getTime());
+		}
 		this.moonPhase(y,m-1,d);
 		
 		

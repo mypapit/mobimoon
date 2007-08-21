@@ -12,7 +12,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * MobiMoon 1.0 <info@mypapit.net>
+ * MobiMoon 2.0 <info@mypapit.net>
  * Copyright 2007 Mohammad Hafiz bin Ismail. All rights reserved.
  * 
  * HijriConvert.java 
