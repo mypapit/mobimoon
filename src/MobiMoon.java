@@ -12,7 +12,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * MobiMoon 1.0 <info@mypapit.net>
+ * MobiMoon 2.0 <info@mypapit.net>
  * Copyright 2007 Mohammad Hafiz bin Ismail. All rights reserved.
  * 
  * MobiMoon.java 
@@ -28,8 +28,8 @@ import java.io.*;
 public class MobiMoon extends MIDlet implements CommandListener,ItemStateListener
 {
 	private Display display;
-	private Command cmdExit,cmdAbout,cmdBack,cmdReset;
-	private Form form;
+	private Command cmdExit,cmdAbout,cmdBack,cmdReset, cmdImportant;
+	private Form form,importantForm;
 	private AboutForm aboutForm;
 	private DateFieldExtra datefield;
 	private MoonItem moonitem;
@@ -43,7 +43,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 							"Fri",
 							"Sat",
 							};
-	/*
+	
 	private String month[] = {
 							"NIL",
 							"Muharram",
@@ -60,7 +60,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 							"Z.Hijjah"
 							
 						};
-		*/					
+	/*					
 								
 	private String month[] = {
 							"NIL",
@@ -78,15 +78,15 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 							"D.al-Hijjah"
 							
 						};
-							
-	
+	*/
 
 	public MobiMoon()
 	{
 	cmdExit = new Command("Exit",Command.EXIT,2);
-	cmdAbout = new Command("About",Command.HELP,4);
+	cmdAbout = new Command("About",Command.HELP,10);
 	cmdBack = new Command("Back",Command.BACK,3);
 	cmdReset = new Command("Reset",Command.SCREEN,1);
+	cmdImportant = new Command("Important Dates",Command.SCREEN,4);
 	
 	
 	hijritext = new StringItem(null,"");
@@ -99,6 +99,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 	form.addCommand(cmdExit);
 	form.addCommand(cmdAbout);
 	form.addCommand(cmdReset);
+	form.addCommand(cmdImportant);
 	form.setCommandListener(this);
 	form.append(moonitem);
 	form.append(datefield);
@@ -135,7 +136,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 			destroyApp(true);
 		} else if (c== cmdAbout) {
 		
-			aboutForm = new AboutForm("About","MobiMoon 1.1","/b5.png");
+			aboutForm = new AboutForm("About","MobiMoon 2.0","/b5.png");
 			aboutForm.addCommand(cmdBack);
 			aboutForm.setHyperlink("http://java.mobilepit.com", (MIDlet) this);
 			aboutForm.setCopyright("Mohammad Hafiz","2007");
@@ -148,11 +149,14 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 			display.setCurrent(aboutForm);
 		} else if ( c == cmdBack) {
 			aboutForm = null;
+			importantForm = null;
 			this.showMain();
 		} else if ( c == cmdReset) {
 			datefield.setDate(new Date());
 			this.updateDate();
-		}	
+		} else if ( c == cmdImportant) {
+			this.listImportantDates();
+		}
 	
 	}
 	
@@ -171,9 +175,100 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 		moonitem.setPhase(datefield.getPhase());
 		hijritext.setText(day[datefield.getDay()] + ", " + datefield.getHdate() + " " + month[datefield.getHmonth()] + " " + datefield.getHyear());
 		//hijritext.setText(datefield.getDay() + ", " + datefield.getHdate() + " " + datefield.getHmonth() + " " + datefield.getHyear());
+/*
+		int d = datefield.getHdate();
+		int m = datefield.getHmonth();
+		int y = datefield.getHyear();
 		
+		GregConvert g = new GregConvert(15,6,1428);
+		
+		String s = g.getDay() + "d " + g.getMonth() + "m " + g.getYear() + " ";
+		form.append(s);
+*/
 		//form.append ("Day of the month " + datefield.getGdate());		
 		
 	}
+	
+	
+	public void listImportantDates() 
+	{
+		GregConvert g;
+		importantForm = new Form("Important date");
+		importantForm.addCommand(cmdBack);
+		importantForm.setCommandListener(this);
+		
+		StringItem si = new StringItem("label","text");
+		
+		
+		int month = datefield.getHmonth();
+		int	year = datefield.getHyear();
+		
+		for (int i=0;i<4;i++) {
+				switch ((month+i)%13) {
+				//1,2,3,7,8,9,12
+					case 1:
+						si = new StringItem(new GregConvert(1,1,year).toString(),"Awwal Muharram");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
+						
+						si = new StringItem(new GregConvert(10,1,year).toString(),"Day of Ashura");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
+					break;
+					case 2:
+						si = new StringItem(new GregConvert(27,2,year).toString(),"Hijrah to Madinah");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
+					break;
+		
+					case 3:
+						si = new StringItem(new GregConvert(12,3,year).toString(),"Birth of Prophet Muhammad (PBUH)");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
+					break;
+					
+					case 7:
+						si = new StringItem(new GregConvert(27,7,year).toString(),"Israk Mikraj");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
+					break;
+		
+					case 9:
+						si = new StringItem(new GregConvert(1,9,year).toString(),"Awal Ramadan");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
+						
+						si = new StringItem(new GregConvert(21,9,year).toString(),"Nuzul Quran");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
+						
+						si = new StringItem(new GregConvert(27,9,year).toString(),"Lailatul Qadar");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
+					break;
+		
+					case 10:
+						si = new StringItem(new GregConvert(1,10,year).toString(),"Eidul-Fitri");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
+					break;
+		
+					case 12:
+						si = new StringItem(new GregConvert(10,12,year).toString(),"Eidul-Adha");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
+					break;
+		
+						
+				}
+		}
+				
+		
+		display.setCurrent(importantForm);
+		
+	
+	}
+	
+	
 
 }
