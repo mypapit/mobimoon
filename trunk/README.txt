@@ -1,4 +1,4 @@
-Mobimoon 2.0 - Copyright 2007 Mohammad Hafiz bin Ismail (info@mypapit.net)
+Mobimoon 2.1 - Copyright 2007 Mohammad Hafiz bin Ismail (info@mypapit.net)
 
 For more information regarding this download, please refer to
 http://java.mobilepit.com/p/mobimoon/
