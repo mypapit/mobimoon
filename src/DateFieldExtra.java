@@ -102,6 +102,12 @@ public class DateFieldExtra extends DateField
 	{
 		return hc.getYear();
 	}
+	
+	public void calibrate(int value)
+	{
+		hc.calibrate(value);
+	
+	}
 
 	private void moonPhase(int y, int m, int d)
 	{
