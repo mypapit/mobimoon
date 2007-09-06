@@ -1,3 +1,7 @@
+6 Sep 2007  Mobimoon 2.1
+------------------------
+-added date calibration feature
+
 14 Aug 2007 Mobimoon 2.0
 ----------------------
 - added 'Important Islamic Date' functionality
