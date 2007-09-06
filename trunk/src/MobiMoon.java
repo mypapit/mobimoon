@@ -25,14 +25,18 @@ import javax.microedition.lcdui.*;
 import java.util.Date;
 import java.io.*;
 
+
+
 public class MobiMoon extends MIDlet implements CommandListener,ItemStateListener
 {
 	private Display display;
-	private Command cmdExit,cmdAbout,cmdBack,cmdReset, cmdImportant;
-	private Form form,importantForm;
+	private Command cmdExit,cmdAbout,cmdBack,cmdReset, cmdImportant,cmdSettings;
+	public Form form;
+	private Form importantForm;
 	private AboutForm aboutForm;
 	private DateFieldExtra datefield;
 	private MoonItem moonitem;
+	private SettingsForm settingsForm;
 	private StringItem hijritext;
 	private String day[] = {"NIL",
 							"Sun",
@@ -87,6 +91,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 	cmdBack = new Command("Back",Command.BACK,3);
 	cmdReset = new Command("Reset",Command.SCREEN,1);
 	cmdImportant = new Command("Important Dates",Command.SCREEN,4);
+	cmdSettings = new Command("Settings",Command.SCREEN,5);
 	
 	
 	hijritext = new StringItem(null,"");
@@ -100,12 +105,14 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 	form.addCommand(cmdAbout);
 	form.addCommand(cmdReset);
 	form.addCommand(cmdImportant);
+	form.addCommand(cmdSettings);
 	form.setCommandListener(this);
 	form.append(moonitem);
 	form.append(datefield);
 	form.append(hijritext);
 	form.setItemStateListener(this);
 	display = Display.getDisplay(this);
+	settingsForm = new SettingsForm(this);
 	this.updateDate();
 		
 	}
@@ -136,13 +143,13 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 			destroyApp(true);
 		} else if (c== cmdAbout) {
 		
-			aboutForm = new AboutForm("About","MobiMoon 2.0","/b5.png");
+			aboutForm = new AboutForm("About","MobiMoon 2.1","/b5.png");
 			aboutForm.addCommand(cmdBack);
 			aboutForm.setHyperlink("http://java.mobilepit.com", (MIDlet) this);
 			aboutForm.setCopyright("Mohammad Hafiz","2007");
 			aboutForm.setCommandListener(this);
 			aboutForm.append(
-					"Display Moon Phases and Hijri date. The displayed date might subject to +/- 1 day error margin.\n\nThis software is licensed under the GNU General Public License version 2.");
+					"Display Moon Phases and Hijri date. The displayed date might subject to +/- 1 day error margin.\n\nThis program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2.0");
 					
  		 //This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version"
 					 
@@ -156,6 +163,9 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 			this.updateDate();
 		} else if ( c == cmdImportant) {
 			this.listImportantDates();
+		} else if ( c == cmdSettings) {
+			//settingsForm = new SettingsForm(this);
+			display.setCurrent(settingsForm);
 		}
 	
 	}
@@ -168,11 +178,13 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 		}
 	}
 	
-	private void updateDate()
+	public void updateDate()
 	{
 	
+		
 		datefield.computeValue();
 		moonitem.setPhase(datefield.getPhase());
+		datefield.calibrate(settingsForm.getValue() );
 		hijritext.setText(day[datefield.getDay()] + ", " + datefield.getHdate() + " " + month[datefield.getHmonth()] + " " + datefield.getHyear());
 		//hijritext.setText(datefield.getDay() + ", " + datefield.getHdate() + " " + datefield.getHmonth() + " " + datefield.getHyear());
 /*
@@ -232,6 +244,11 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
 						importantForm.append(si);
 					break;
+					
+					case 8:
+						si = new StringItem(new GregConvert(15,8,year).toString(),"Nisfu Shabaan");
+						si.setLayout(Item.LAYOUT_NEWLINE_AFTER);
+						importantForm.append(si);
 		
 					case 9:
 						si = new StringItem(new GregConvert(1,9,year).toString(),"Awal Ramadan");
@@ -269,6 +286,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 	
 	}
 	
+
 	
 
 }

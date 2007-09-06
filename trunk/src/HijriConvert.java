@@ -104,6 +104,17 @@ public class HijriConvert {
 		return year;
 	}
 	
+	public void calibrate(int value)
+	{
+		day = day + value;
+		if (day > 30) {
+			day = 1;
+			month = month +1;
+		} else if (day < 1) {
+			day = 29;
+			month = month -1;
+		}
+	}
 	
 
 }
