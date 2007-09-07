@@ -17,3 +17,6 @@ Example :
   * mobimoon-1.0-light.zip
 
 Source code for mobimoon is available from Google Code SVN server
+
+= Official Website =
+Visit MobiMoon official website at [http://java.mobilepit.com/p/mobimoon/]
