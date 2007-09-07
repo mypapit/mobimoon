@@ -7,14 +7,16 @@ import java.io.*;
 public class SettingsForm extends Form implements CommandListener
 {
 
-private ChoiceGroup cgCalibrate;
+private ChoiceGroup cgCalibrate,cgHemisphere;
+
 public Command DISMISS_COMMAND;
 public Command cmdSave;
 private Display display;
 private String calibrateValue[] = {"-1","0","+1"};
+private String hemisphere[] = {"Northern","Southern"};
 private MobiMoon midlet;
 private RecordStore rs;
-private int calibValue;
+private int calibValue,hemisphereValue;
 
 public SettingsForm(MobiMoon midlet)
 {
@@ -28,12 +30,15 @@ public SettingsForm(MobiMoon midlet)
 	
 	cgCalibrate = new ChoiceGroup("Calibrate days",Choice.POPUP,calibrateValue,null);
 	cgCalibrate.setSelectedIndex(1,true);
+	cgHemisphere = new ChoiceGroup("Hemisphere", Choice.POPUP,hemisphere,null);
+	cgHemisphere.setSelectedIndex(1,true);
 	this.getSettings();
 	
 	
 	
 	this.append("Settings to calibrate Hijri date\n");
 	this.append(cgCalibrate);
+	this.append(cgHemisphere);
 	this.addCommand(DISMISS_COMMAND);
 	this.addCommand(cmdSave);
 	this.setCommandListener(this);
@@ -49,6 +54,7 @@ public void commandAction(Command c, Displayable d)
 	} else if (c == cmdSave) {
 		this.saveSettings(false);
 		this.cleanUp();
+		midlet.moonitem.setNorthern(this.getHemisphere());
 		midlet.updateDate();
 		display.setCurrent(midlet.form);
 	}
@@ -63,7 +69,10 @@ private void saveSettings(boolean init)
 		
 			try { 
 					this.calibValue = cgCalibrate.getSelectedIndex();
+					this.hemisphereValue = cgHemisphere.getSelectedIndex();
 					dout.writeInt(this.calibValue);
+					dout.writeInt(this.hemisphereValue);
+					
 					
 					byte[] data = bout.toByteArray();
 					
@@ -101,7 +110,10 @@ private void getSettings() {
 			din = new DataInputStream(bin);
 			
 			this.calibValue = din.readInt();
+			this.hemisphereValue = din.readInt();
+			
 			cgCalibrate.setSelectedIndex(this.calibValue,true);
+			cgHemisphere.setSelectedIndex(this.hemisphereValue,true);
 			
 			din.close();
 			bin.close();
@@ -135,9 +147,19 @@ private void cleanUp()
 	
 }
 
-public int getValue()
+public int getCalibValue()
 {
 	return this.calibValue-1;
+}
+
+public boolean getHemisphere()
+{
+	if (this.hemisphereValue>0) {
+		return false;
+	} 
+		
+	return true;
+		
 }
 
 

@@ -1,3 +1,7 @@
+7 Sep 2007 Mobimoon 2.2
+-------------------------
+- added hemisphere selection
+
 6 Sep 2007  Mobimoon 2.1
 ------------------------
 -added date calibration feature

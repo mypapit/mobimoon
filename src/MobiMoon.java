@@ -35,7 +35,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 	private Form importantForm;
 	private AboutForm aboutForm;
 	private DateFieldExtra datefield;
-	private MoonItem moonitem;
+	public MoonItem moonitem;
 	private SettingsForm settingsForm;
 	private StringItem hijritext;
 	private String day[] = {"NIL",
@@ -48,7 +48,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 							"Sat",
 							};
 	
-	private String month[] = {
+	/*private String month[] = {
 							"NIL",
 							"Muharram",
 							"Safar",
@@ -64,25 +64,26 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 							"Z.Hijjah"
 							
 						};
-	/*					
+	*/
+						
 								
 	private String month[] = {
 							"NIL",
 							"Muharram",
 							"Safar",
-							"R.al-awwal",
-							"R.al-thani ",
-							"J.al-awwal ",
-							"J.al-thani ",
+							"Rabi al-awwal",
+							"Rabi al-thani ",
+							"Jum. al-awwal ",
+							"Jum. al-thani ",
 							"Rajab",
 							"Shaaban",
 							"Ramadan",
 							"Shawwal",
-							"D.al-Qi'dah",
-							"D.al-Hijjah"
+							"Dhu al-Qi'dah",
+							"Dhu al-Hijjah"
 							
 						};
-	*/
+	
 
 	public MobiMoon()
 	{
@@ -113,6 +114,9 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 	form.setItemStateListener(this);
 	display = Display.getDisplay(this);
 	settingsForm = new SettingsForm(this);
+	
+	moonitem.setNorthern(settingsForm.getHemisphere());
+	
 	this.updateDate();
 		
 	}
@@ -143,7 +147,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 			destroyApp(true);
 		} else if (c== cmdAbout) {
 		
-			aboutForm = new AboutForm("About","MobiMoon 2.1","/b5.png");
+			aboutForm = new AboutForm("About","MobiMoon 2.2","/b5.png");
 			aboutForm.addCommand(cmdBack);
 			aboutForm.setHyperlink("http://java.mobilepit.com", (MIDlet) this);
 			aboutForm.setCopyright("Mohammad Hafiz","2007");
@@ -184,7 +188,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 		
 		datefield.computeValue();
 		moonitem.setPhase(datefield.getPhase());
-		datefield.calibrate(settingsForm.getValue() );
+		datefield.calibrate(settingsForm.getCalibValue() );
 		hijritext.setText(day[datefield.getDay()] + ", " + datefield.getHdate() + " " + month[datefield.getHmonth()] + " " + datefield.getHyear());
 		//hijritext.setText(datefield.getDay() + ", " + datefield.getHdate() + " " + datefield.getHmonth() + " " + datefield.getHyear());
 /*
