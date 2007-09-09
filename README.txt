@@ -1,11 +1,12 @@
-Mobimoon 2.1 - Copyright 2007 Mohammad Hafiz bin Ismail (info@mypapit.net)
+Mobimoon 2.3 - Copyright 2007 Mohammad Hafiz bin Ismail  
+(info@mypapit.net)
 
 For more information regarding this download, please refer to
 http://java.mobilepit.com/p/mobimoon/
 http://code.google.com/p/mobimoon/w/list
 
 This release is for MIDP 2.0/CLDC 1.1 compatible phone, 
-MIDP 1.0 version is avaiable from the above-mentioned URL
+The MIDP 1.0 version might be available from the above-mentioned URL
 
 
 Bugs Reports and Issues
@@ -13,10 +14,10 @@ Bugs Reports and Issues
 Please address bug reports and issues concerning on your phone to : info@mypapit.net
 For easy bug-fixing, please include these information along with your report
 
-The model of your phone,
-Mobimoon version and release number,
-Description of the bug(s),
-How to reproduce the bug(s)
+The model of your phone :
+Mobimoon version and release number :
+Description of the bug(s) :
+How to reproduce the bug(s) :
 
 
 Copyright

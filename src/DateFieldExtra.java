@@ -32,6 +32,7 @@ public class DateFieldExtra extends DateField
 	private HijriConvert hc;
 	private int d,m,y;
 	private int phase;
+	private int calibValue = 0;
 	
 	public DateFieldExtra(String label, int mode){
 		super(label, mode);
@@ -63,6 +64,7 @@ public class DateFieldExtra extends DateField
 		
 		
 		hc = new HijriConvert(d,m,y);
+		hc.calibrate(this.calibValue);
 		
 		
 	}
@@ -105,7 +107,8 @@ public class DateFieldExtra extends DateField
 	
 	public void calibrate(int value)
 	{
-		hc.calibrate(value);
+		this.calibValue = value;
+	//	hc.calibrate(value);
 	
 	}
 
