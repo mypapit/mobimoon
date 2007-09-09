@@ -29,15 +29,17 @@ import java.io.*;
 
 public class MobiMoon extends MIDlet implements CommandListener,ItemStateListener
 {
-	private Display display;
+	public Display display;
 	private Command cmdExit,cmdAbout,cmdBack,cmdReset, cmdImportant,cmdSettings;
 	public Form form;
 	private Form importantForm;
 	private AboutForm aboutForm;
-	private DateFieldExtra datefield;
+	public DateFieldExtra datefield;
 	public MoonItem moonitem;
-	private SettingsForm settingsForm;
+	//private SettingsForm settingsForm;
 	private StringItem hijritext;
+	private Settings rsettings;
+	
 	private String day[] = {"NIL",
 							"Sun",
 							"Mon",
@@ -48,7 +50,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 							"Sat",
 							};
 	
-	/*private String month[] = {
+/*  private String month[] = {
 							"NIL",
 							"Muharram",
 							"Safar",
@@ -113,23 +115,27 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 	form.append(hijritext);
 	form.setItemStateListener(this);
 	display = Display.getDisplay(this);
-	settingsForm = new SettingsForm(this);
+	//settingsForm = new SettingsForm(this);
+	rsettings = new Settings();
 	
-	moonitem.setNorthern(settingsForm.getHemisphere());
+	//rsettings.getSettings();
 	
+	moonitem.setNorthern(rsettings.isNorthern());
+	datefield.calibrate(rsettings.getDaysCalib());
+	
+	rsettings.cleanUp();
+	rsettings = null;
+		
 	this.updateDate();
 		
 	}
 	
 	public void startApp()
 	{
-		this.showMain();
+		display.setCurrent(form);
 		
 	}
 	
-	private void showMain(){
-		display.setCurrent(form);
-	}
 	
 	public void pauseApp()
 	{
@@ -147,7 +153,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 			destroyApp(true);
 		} else if (c== cmdAbout) {
 		
-			aboutForm = new AboutForm("About","MobiMoon 2.2","/b5.png");
+			aboutForm = new AboutForm("About","MobiMoon 2.3","/b5.png");
 			aboutForm.addCommand(cmdBack);
 			aboutForm.setHyperlink("http://java.mobilepit.com", (MIDlet) this);
 			aboutForm.setCopyright("Mohammad Hafiz","2007");
@@ -161,7 +167,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 		} else if ( c == cmdBack) {
 			aboutForm = null;
 			importantForm = null;
-			this.showMain();
+			display.setCurrent(form);
 		} else if ( c == cmdReset) {
 			datefield.setDate(new Date());
 			this.updateDate();
@@ -169,7 +175,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 			this.listImportantDates();
 		} else if ( c == cmdSettings) {
 			//settingsForm = new SettingsForm(this);
-			display.setCurrent(settingsForm);
+			display.setCurrent(new SettingsForm(this));
 		}
 	
 	}
@@ -188,7 +194,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 		
 		datefield.computeValue();
 		moonitem.setPhase(datefield.getPhase());
-		datefield.calibrate(settingsForm.getCalibValue() );
+		//datefield.calibrate( rsettings.getDaysCalib() );
 		hijritext.setText(day[datefield.getDay()] + ", " + datefield.getHdate() + " " + month[datefield.getHmonth()] + " " + datefield.getHyear());
 		//hijritext.setText(datefield.getDay() + ", " + datefield.getHdate() + " " + datefield.getHmonth() + " " + datefield.getHyear());
 /*
@@ -284,7 +290,7 @@ public class MobiMoon extends MIDlet implements CommandListener,ItemStateListene
 				}
 		}
 				
-		
+		g = null;
 		display.setCurrent(importantForm);
 		
 	

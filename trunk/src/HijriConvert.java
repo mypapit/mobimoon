@@ -108,10 +108,10 @@ public class HijriConvert {
 	{
 		day = day + value;
 		if (day > 30) {
-			day = 1;
+			day = day % 30;
 			month = month +1;
 		} else if (day < 1) {
-			day = 29;
+			day = (29+day);
 			month = month -1;
 		}
 	}

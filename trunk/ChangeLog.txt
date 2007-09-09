@@ -1,6 +1,6 @@
-7 Sep 2007 Mobimoon 2.2
+9 Sep 2006  Mobimoon 2.3
 -------------------------
-- added hemisphere selection
+- Memory optimization, minor UI revision to make it more inuitive
 
 6 Sep 2007  Mobimoon 2.1
 ------------------------
